@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XWeb — Websites for local businesses</title>
+<meta name="description" content="XWeb builds clean, affordable websites for local businesses that don't have one yet. $600–$800 per site, plus $40/month for ongoing updates.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f3d2e'/%3E%3Cpath d='M18 18l28 28M46 18L18 46' stroke='%23fff' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#fbfaf7; --alt:#f2efe8; --ink:#17201b; --muted:#5b665f; --line:#e3ded2;
+  --brand:#0f3d2e; --brand-2:#1d6b4f; --accent:#e9b44c; --radius:16px;
+  --shadow:0 10px 30px rgba(15,61,46,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-text-size-adjust:100%}
+img,svg{max-width:100%}
+a{color:inherit}
+.container{width:min(1100px,100% - 40px);margin-inline:auto}
+h1,h2,h3,h4{line-height:1.15;margin:0 0 .5em;letter-spacing:-.02em}
+h1{font-size:clamp(2.6rem,8vw,5rem)}
+h1 em{font-style:normal;color:var(--brand-2)}
+h2{font-size:clamp(1.8rem,4.5vw,2.6rem)}
+h3{font-size:1.2rem}
+p{margin:0 0 1em}
+.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-2);margin-bottom:.8em}
+.lead{font-size:1.2rem;color:var(--muted);max-width:34em}
+.note{font-size:.85rem;color:var(--muted)}
+.center{text-align:center;margin-top:1.5rem}
+
+/* Buttons */
+.btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;font-weight:600;padding:.85em 1.6em;border-radius:999px;border:2px solid var(--brand);cursor:pointer;font:inherit;font-weight:600;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover,.btn:focus-visible{background:var(--brand-2);border-color:var(--brand-2);transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-ghost{background:transparent;color:var(--brand)}
+.btn-ghost:hover,.btn-ghost:focus-visible{color:#fff}
+.btn-small{padding:.5em 1.1em;font-size:.95rem}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:.1em;font-weight:800;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em}
+.logo-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--brand);color:#fff;margin-right:.25em;font-size:1rem}
+.menu{display:flex;align-items:center;gap:1.6rem}
+.menu a:not(.btn){text-decoration:none;color:var(--muted);font-weight:500;transition:color .2s}
+.menu a:not(.btn):hover{color:var(--brand)}
+.nav-toggle{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .25s}
+.nav-toggle span:first-child{top:18px}.nav-toggle span:last-child{top:26px}
+.nav-toggle[aria-expanded="true"] span:first-child{transform:translateY(4px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:last-child{transform:translateY(-4px) rotate(-45deg)}
+
+/* Hero */
+.hero{padding:clamp(60px,12vw,140px) 0 clamp(50px,8vw,90px);background:radial-gradient(900px 400px at 85% 0,#e4efe8 0,transparent 70%)}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.8rem 0 2.2rem}
+.hero-facts{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.6rem 2rem;color:var(--muted);font-size:.95rem}
+.hero-facts strong{color:var(--ink)}
+
+/* Sections */
+.section{padding:clamp(56px,9vw,100px) 0}
+.section.alt{background:var(--alt)}
+.section-head{max-width:640px;margin-bottom:2.5rem}
+.section-head p:last-child{color:var(--muted)}
+
+/* Showcase */
+.showcase{display:grid;grid-template-columns:1.6fr 1fr;gap:2.5rem;align-items:center}
+.browser{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#fff;transition:transform .3s}
+.browser:hover{transform:translateY(-4px)}
+.browser-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#ece8de}
+.browser-bar i{width:10px;height:10px;border-radius:50%;background:#cfc9ba}
+.browser-bar span{margin-left:12px;font-size:.75rem;color:var(--muted);background:#fff;border-radius:999px;padding:2px 14px}
+.browser-body{position:relative;aspect-ratio:16/10;background:#faf3e6;font-family:Georgia,serif}
+.screen{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .4s;display:flex;flex-direction:column}
+.screen.active{opacity:1;visibility:visible}
+.ie-nav{display:flex;gap:1.2em;align-items:center;padding:.9em 1.2em;font-size:clamp(.55rem,1.6vw,.85rem);color:#5a4a3a}
+.ie-nav b{margin-right:auto;font-size:1.3em;color:#3b2a1e}
+.ie-nav .on{border-bottom:2px solid #c0602f}
+.ie-hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 8%;background:linear-gradient(100deg,#faf3e6 45%,#e7c9a3 45%,#c98a55 100%);color:#3b2a1e}
+.ie-hero h3{font-size:clamp(1.1rem,4vw,2.4rem)}
+.ie-hero p{font-size:clamp(.6rem,1.6vw,.95rem);max-width:16em}
+.ie-btn{align-self:flex-start;background:#c0602f;color:#fff;font-family:system-ui,sans-serif;font-size:clamp(.55rem,1.5vw,.85rem);padding:.6em 1.2em;border-radius:999px}
+.ie-menu,.ie-visit{flex:1;padding:1% 8%;color:#3b2a1e}
+.ie-menu h3,.ie-visit h3{font-size:clamp(1rem,3vw,1.8rem)}
+.ie-cols{display:grid;grid-template-columns:1fr 1fr;gap:6%}
+.ie-cols h4{font-size:clamp(.65rem,1.8vw,1rem);color:#c0602f;margin-bottom:.4em}
+.ie-cols p{display:flex;align-items:center;gap:.5em;font-size:clamp(.55rem,1.5vw,.85rem);margin:0 0 .6em}
+.ie-cols p i{flex:1;border-bottom:1px dotted #b9a68f}
+.ie-visit{display:grid;grid-template-columns:repeat(3,1fr);gap:3%;align-content:start}
+.ie-visit h3{grid-column:1/-1}
+.ie-card{background:#fff;border-radius:10px;padding:1.6em .8em;font-family:system-ui,sans-serif;font-size:clamp(.5rem,1.4vw,.8rem);text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.thumbs{display:flex;gap:.5rem;margin-bottom:1.5rem}
+.thumb{flex:1;padding:.7em;border-radius:12px;border:1.5px solid var(--line);background:#fff;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}
+.thumb:hover{border-color:var(--brand-2);transform:translateY(-2px)}
+.thumb.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.ticks{list-style:none;padding:0;margin:0 0 1.2rem}
+.ticks li{position:relative;padding-left:1.7em;margin-bottom:.6em}
+.ticks li::before{content:"✓";position:absolute;left:0;color:var(--brand-2);font-weight:800}
+
+/* Example cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1rem 1.4rem;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card h3{margin:1rem .3rem .3rem}
+.card p{margin:0 .3rem;color:var(--muted);font-size:.95rem}
+.badge{position:absolute;top:1.6rem;right:1.6rem;z-index:2;background:var(--accent);color:#3a2a00;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.3em .8em;border-radius:999px}
+.mock{border-radius:10px;overflow:hidden;aspect-ratio:4/3;display:flex;flex-direction:column;transition:transform .3s}
+.card:hover .mock{transform:scale(1.02)}
+.m-nav{display:flex;align-items:center;gap:.5em;padding:.8em 1em;font-size:.75rem}
+.m-nav b{margin-right:auto;letter-spacing:.05em}
+.m-nav span{width:22px;height:4px;border-radius:2px;background:currentColor;opacity:.4}
+.m-hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 1.2rem}
+.m-hero h4{font-size:1.5rem;margin-bottom:.7em}
+.m-btn{align-self:flex-start;font-size:.75rem;font-weight:700;padding:.55em 1.1em;border-radius:999px}
+.mock-barber{background:#161616;color:#f3ece0}
+.mock-barber .m-hero h4{text-transform:uppercase;letter-spacing:.02em}
+.mock-barber .m-btn{background:#c9a24d;color:#161616;border-radius:3px}
+.mock-plumber{background:linear-gradient(160deg,#e8f2fb,#c8e0f5);color:#0c2c4a}
+.mock-plumber .m-btn{background:#e2572b;color:#fff}
+.mock-florist{background:linear-gradient(160deg,#fdf0f0,#f7d9df);color:#5a2a3a;font-family:Georgia,serif}
+.mock-florist .m-btn{background:#7c9a6d;color:#fff}
+
+/* Steps */
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.step{padding:1.5rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff;transition:transform .25s,border-color .25s}
+.step:hover{transform:translateY(-4px);border-color:var(--brand-2)}
+.step p{color:var(--muted);margin:0}
+.num{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;margin-bottom:1rem}
+
+/* Pricing */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:760px}
+.price{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:2rem;transition:transform .25s,box-shadow .25s}
+.price:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.price.featured{background:var(--brand);color:#fff;border-color:var(--brand)}
+.price.featured .ticks li::before{color:var(--accent)}
+.amount{font-size:2.4rem;font-weight:800;letter-spacing:-.03em;margin:0}
+.amount span{font-size:1rem;font-weight:500;opacity:.8}
+.per{opacity:.75;font-size:.9rem;margin-bottom:1.4rem}
+
+/* Contact */
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-list{list-style:none;padding:0;margin:2rem 0 0}
+.contact-list li{display:flex;flex-direction:column;padding:.9rem 0;border-top:1px solid var(--line)}
+.contact-list span{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.contact-list a{color:var(--brand-2);font-weight:600;text-decoration:none}
+.contact-list a:hover{text-decoration:underline}
+.form{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;display:grid;gap:1rem}
+.form label{display:grid;gap:.3rem;font-weight:600;font-size:.9rem}
+.form input,.form textarea{font:inherit;font-weight:400;padding:.7em .9em;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);transition:border-color .2s}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--brand-2)}
+
+.footer{border-top:1px solid var(--line);padding:1.6rem 0;font-size:.9rem;color:var(--muted)}
+.footer .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+
+/* Scroll reveal */
+.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.js .reveal.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .nav-toggle{display:block}
+  .menu{position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 20px 1.2rem;display:none}
+  .menu.open{display:flex}
+  .menu a{padding:.8em 0}
+  .menu .btn{text-align:center;margin-top:.5rem}
+  .showcase,.contact-inner{grid-template-columns:1fr;gap:1.8rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="container nav">
+    <a href="#top" class="logo" aria-label="XWeb home"><span class="logo-mark">X</span>Web</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Toggle menu"><span></span><span></span></button>
+    <nav id="menu" class="menu">
+      <a href="#work">Portfolio</a>
+      <a href="#examples">Examples</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact" class="btn btn-small">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Web design for local businesses</p>
+      <h1>Your doorway<br>to the <em>web.</em></h1>
+      <p class="lead">Don't have a website yet? I'll design and launch a clean, professional one for your business — and keep it fresh for you afterwards.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn">Start your website</a>
+        <a href="#work" class="btn btn-ghost">See my work</a>
+      </div>
+      <ul class="hero-facts">
+        <li><strong>$600–$800</strong> one-off per site</li>
+        <li><strong>$40/mo</strong> ongoing updates</li>
+        <li><strong>Mobile-ready</strong> on every device</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Portfolio</p>
+        <h2>My first project: Interval Eatery</h2>
+        <p>A café website built to show off the menu, the atmosphere and the essentials — opening hours and where to find them. Tap a screen below to flip through the site.</p>
+      </div>
+
+      <div class="showcase reveal">
+        <div class="browser" id="gallery">
+          <div class="browser-bar"><i></i><i></i><i></i><span>intervaleatery</span></div>
+          <div class="browser-body">
+            <!-- Screen 1: Home -->
+            <div class="screen active" data-screen="home">
+              <div class="ie-nav"><b>Interval</b><span>Menu</span><span>About</span><span>Visit</span></div>
+              <div class="ie-hero">
+                <h3>Good coffee.<br>Good company.</h3>
+                <p>Fresh brunch, great coffee, all day.</p>
+                <span class="ie-btn">View the menu</span>
+              </div>
+            </div>
+            <!-- Screen 2: Menu -->
+            <div class="screen" data-screen="menu">
+              <div class="ie-nav"><b>Interval</b><span class="on">Menu</span><span>About</span><span>Visit</span></div>
+              <div class="ie-menu">
+                <h3>The Menu</h3>
+                <div class="ie-cols">
+                  <div><h4>Brunch</h4><p><span>Smashed avo</span><i></i></p><p><span>Eggs your way</span><i></i></p><p><span>Sweet French toast</span><i></i></p></div>
+                  <div><h4>Coffee</h4><p><span>Flat white</span><i></i></p><p><span>Long black</span><i></i></p><p><span>Iced latte</span><i></i></p></div>
+                </div>
+              </div>
+            </div>
+            <!-- Screen 3: Visit -->
+            <div class="screen" data-screen="visit">
+              <div class="ie-nav"><b>Interval</b><span>Menu</span><span>About</span><span class="on">Visit</span></div>
+              <div class="ie-visit">
+                <h3>Come say hi</h3>
+                <div class="ie-card">Opening hours</div>
+                <div class="ie-card">Find us on the map</div>
+                <div class="ie-card">Get in touch</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-side">
+          <div class="thumbs" role="tablist" aria-label="Interval Eatery screens">
+            <button role="tab" class="thumb active" data-target="home" aria-selected="true">Home</button>
+            <button role="tab" class="thumb" data-target="menu" aria-selected="false">Menu</button>
+            <button role="tab" class="thumb" data-target="visit" aria-selected="false">Visit</button>
+          </div>
+          <ul class="ticks">
+            <li>Clear menu that's easy to scan on a phone</li>
+            <li>Opening hours and location up front</li>
+            <li>Warm, welcoming look that matches the café</li>
+          </ul>
+          <p class="note">Screens shown are simplified previews of the design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="examples" class="section alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Example designs</p>
+        <h2>What your site could look like</h2>
+        <p>These are <strong>concept designs</strong> for other kinds of local business — not real clients. They show the range of styles I can build.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <span class="badge">Example design</span>
+          <div class="mock mock-barber">
+            <div class="m-nav"><b>SHARP&nbsp;&amp;&nbsp;CO</b><span></span><span></span></div>
+            <div class="m-hero"><h4>Fresh cuts.<br>Clean lines.</h4><span class="m-btn">Book a chair</span></div>
+          </div>
+          <h3>The Barber</h3>
+          <p>Bold and confident, with online booking front and centre.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="badge">Example design</span>
+          <div class="mock mock-plumber">
+            <div class="m-nav"><b>FlowRight</b><span></span><span></span></div>
+            <div class="m-hero"><h4>Fast, honest<br>plumbing.</h4><span class="m-btn">Call now</span></div>
+          </div>
+          <h3>The Plumber</h3>
+          <p>Trustworthy and simple, with a big call button for emergencies.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="badge">Example design</span>
+          <div class="mock mock-florist">
+            <div class="m-nav"><b>Petal &amp; Stem</b><span></span><span></span></div>
+            <div class="m-hero"><h4>Flowers for<br>every occasion.</h4><span class="m-btn">Shop bouquets</span></div>
+          </div>
+          <h3>The Florist</h3>
+          <p>Soft and elegant, built to let the photography shine.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2>Four simple steps</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><span class="num">1</span><h3>Chat</h3><p>We talk about your business, your customers and what you want your site to do. No jargon.</p></li>
+        <li class="step reveal"><span class="num">2</span><h3>Design</h3><p>I put together a design for you to review. We tweak it until you love it.</p></li>
+        <li class="step reveal"><span class="num">3</span><h3>Launch</h3><p>Your site goes live, looking great on phones, tablets and computers.</p></li>
+        <li class="step reveal"><span class="num">4</span><h3>Ongoing updates</h3><p>New menu, new hours, new photos? Send them over and I'll update your site for you.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="pricing" class="section alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Pricing</p>
+        <h2>Simple, upfront pricing</h2>
+      </div>
+      <div class="price-grid">
+        <div class="price reveal">
+          <h3>Your website</h3>
+          <p class="amount">$600–$800</p>
+          <p class="per">one-off, per site</p>
+          <ul class="ticks">
+            <li>Custom design for your business</li>
+            <li>Mobile-friendly on every device</li>
+            <li>Launched and ready to share</li>
+          </ul>
+        </div>
+        <div class="price featured reveal">
+          <h3>Ongoing updates</h3>
+          <p class="amount">$40<span>/month</span></p>
+          <p class="per">optional, cancel anytime</p>
+          <ul class="ticks">
+            <li>Menu, hours and photo changes</li>
+            <li>Content kept fresh for you</li>
+            <li>One friendly person to ask</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note center">The final price within the range depends on how many pages and features you need — I'll confirm it before we start.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="container contact-inner">
+      <div class="reveal">
+        <p class="eyebrow">Contact</p>
+        <h2>Let's get your business online</h2>
+        <p>Tell me a little about your business and I'll get back to you.</p>
+        <ul class="contact-list">
+          <!-- TODO: replace the three placeholders below with your real details -->
+          <li><span>Name</span><strong>[Your name]</strong></li>
+          <li><span>Email</span><a href="mailto:your@email.com">[your@email.com]</a></li>
+          <li><span>Phone</span><a href="tel:+000000000">[your phone number]</a></li>
+        </ul>
+      </div>
+      <form class="form reveal" id="contact-form" action="mailto:your@email.com" method="post" enctype="text/plain">
+        <label>Your name<input type="text" name="name" required autocomplete="name"></label>
+        <label>Business name<input type="text" name="business" autocomplete="organization"></label>
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label>What do you need?<textarea name="message" rows="4"></textarea></label>
+        <button class="btn" type="submit">Send message</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <span>© <span id="year">2026</span> XWeb. Websites for local businesses.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+
+// Mobile menu
+const toggle = document.querySelector('.nav-toggle');
+const menu = document.getElementById('menu');
+toggle.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open);
+});
+menu.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Portfolio gallery
+const thumbs = document.querySelectorAll('.thumb');
+const screens = document.querySelectorAll('.screen');
+function show(name) {
+  thumbs.forEach(t => {
+    const on = t.dataset.target === name;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', on);
+  });
+  screens.forEach(s => s.classList.toggle('active', s.dataset.screen === name));
+}
+thumbs.forEach(t => t.addEventListener('click', () => show(t.dataset.target)));
+
+// Scroll reveal
+const items = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  items.forEach(i => io.observe(i));
+} else {
+  items.forEach(i => i.classList.add('in'));
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+</script>
+</body>
+</html>
